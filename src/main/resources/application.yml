@@ -1,0 +1,35 @@
+
+spring:
+  kafka:
+    bootstrap-servers: pkc-ldvr1.asia-southeast1.gcp.confluent.cloud:9092
+    consumer:
+      group-id: srini-grp-1
+      key-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    properties:
+      sasl:
+        jaas:
+          config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='${CLUSTER_API_KEY}' password='${CLUSTER_API_SECRET}';"
+        mechanism: PLAIN
+      security:
+        protocol: SASL_SSL
+      enable.auto.commit: false
+      auto.offset.reset: earliest
+      session:
+        timeout:
+          ms: 45000
+      basic:
+        auth:
+          credentials:
+            source: USER_INFO
+          user:
+            info: ${SR_API_KEY}:${SR_API_SECRET}
+      schema:
+        registry:
+          url: https://psrc-znpo0.ap-southeast-2.aws.confluent.cloud
+
+app:
+  topic: test-topic-1
+
+server:
+  port: 0
