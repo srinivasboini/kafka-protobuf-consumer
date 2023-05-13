@@ -26,6 +26,20 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.23.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.confluent/kafka-protobuf-serializer -->
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-protobuf-serializer</artifactId>
+			<version>7.3.3</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -42,6 +56,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
