@@ -24,7 +24,7 @@ public class Consumer implements AcknowledgingConsumerAwareMessageListener<Strin
     @KafkaListener(topics = "${app.topic}",  concurrency = "4")
     public void onMessage(ConsumerRecord<String, StockProtos.Stock> record, Acknowledgment acknowledgment, org.apache.kafka.clients.consumer.Consumer<?, ?> consumer) {
         // Process the received message
-        log.info("{} ==> Received message: {}" , Thread.currentThread().getName(), record.value());
+        log.info(" Received message: {}" ,  record.value());
 
         // Manually acknowledge the message
         assert acknowledgment != null;

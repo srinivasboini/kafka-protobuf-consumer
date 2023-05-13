@@ -4,8 +4,8 @@ spring:
     bootstrap-servers: pkc-ldvr1.asia-southeast1.gcp.confluent.cloud:9092
     consumer:
       group-id: srini-grp-1
-      key-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
     properties:
       sasl:
         jaas:
