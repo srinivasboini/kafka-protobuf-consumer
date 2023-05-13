@@ -1,0 +1,14 @@
+
+
+syntax = "proto3";
+
+
+option java_package = "com.srini.protobuf";
+option java_outer_classname = "StockProtos";
+
+message Stock {
+   string name = 1;
+   int32 isin = 2;
+   int32 volume = 3;
+}
+
