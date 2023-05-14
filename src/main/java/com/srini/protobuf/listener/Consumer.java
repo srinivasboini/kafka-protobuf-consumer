@@ -1,5 +1,6 @@
 package com.srini.protobuf.listener;
 
+import com.srini.protobuf.model.Stock;
 import com.srini.protobuf.model.StockProtos;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -17,12 +18,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class Consumer implements AcknowledgingConsumerAwareMessageListener<String,StockProtos.Stock> {
+public class Consumer implements AcknowledgingConsumerAwareMessageListener<String,Stock> {
 
 
     @Override
     @KafkaListener(topics = "${app.topic}",  concurrency = "4")
-    public void onMessage(ConsumerRecord<String, StockProtos.Stock> record, Acknowledgment acknowledgment, org.apache.kafka.clients.consumer.Consumer<?, ?> consumer) {
+    public void onMessage(ConsumerRecord<String, Stock> record, Acknowledgment acknowledgment, org.apache.kafka.clients.consumer.Consumer<?, ?> consumer) {
         // Process the received message
         log.info(" Received message: {}" ,  record.value());
 
