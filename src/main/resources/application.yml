@@ -15,6 +15,7 @@ spring:
         protocol: SASL_SSL
       enable.auto.commit: false
       auto.offset.reset: earliest
+      specific.protobuf.value.type: com.srini.protobuf.model.Stock
       session:
         timeout:
           ms: 45000
