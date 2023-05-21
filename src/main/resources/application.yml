@@ -28,6 +28,16 @@ spring:
         registry:
           url: https://psrc-znpo0.ap-southeast-2.aws.confluent.cloud
 
+
+  sql:
+    init:
+      mode: ALWAYS
+
+  datasource:
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+
 app:
   topic: stock-topic-1
 

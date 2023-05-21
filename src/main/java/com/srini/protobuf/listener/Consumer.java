@@ -1,7 +1,10 @@
 package com.srini.protobuf.listener;
 
 import com.srini.protobuf.model.Stock;
+import com.srini.protobuf.model.StockEntity;
 import com.srini.protobuf.model.StockProtos;
+import com.srini.protobuf.repository.StockRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.context.annotation.Bean;
@@ -18,15 +21,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class Consumer implements AcknowledgingConsumerAwareMessageListener<String,Stock> {
 
+    private final StockRepository stockRepository ;
 
     @Override
     @KafkaListener(topics = "${app.topic}",  concurrency = "4")
     public void onMessage(ConsumerRecord<String, Stock> record, Acknowledgment acknowledgment, org.apache.kafka.clients.consumer.Consumer<?, ?> consumer) {
         // Process the received message
         log.info(" Received message: {}" ,  record.value());
-
+        Stock stock = record.value() ;
+        stockRepository.save(new StockEntity(stock.getName(), stock.getIsin(), stock.getVolume())) ;
         // Manually acknowledge the message
         assert acknowledgment != null;
         acknowledgment.acknowledge();

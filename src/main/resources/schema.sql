@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS Stock (
+  name VARCHAR(30),
+  isin VARCHAR(30),
+  volume INTEGER
+);
