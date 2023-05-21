@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring-kafka-protobuf-consumer
-          image: registry.gitlab.com/srinivasboini/kafka/kafka-protobuf-consumer/kafka-protobuf-consumer:v1.0.4
+          image: registry.gitlab.com/srinivasboini/kafka/kafka-protobuf-consumer/kafka-protobuf-consumer:v1.0.5
           ports:
             - containerPort: 8080
           envFrom:
