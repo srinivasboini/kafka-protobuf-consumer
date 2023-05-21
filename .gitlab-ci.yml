@@ -41,4 +41,4 @@ deploy:
   script:
     - kubectl config get-contexts
     - kubectl apply -f deployment.yaml -n spring-app
-    - kubectl describe deployment spring-postgres -n spring-app
+    - kubectl describe deployment spring-kafka-protobuf-consumer -n spring-app

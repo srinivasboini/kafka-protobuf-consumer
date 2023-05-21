@@ -1,0 +1,49 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-kafka-protobuf-consumer
+  namespace: spring-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-kafka-protobuf-consumer
+  template:
+    metadata:
+      labels:
+        app: spring-kafka-protobuf-consumer
+    spec:
+      containers:
+        - name: spring-kafka-protobuf-consumer
+          image: registry.gitlab.com/srinivasboini/kafka/kafka-protobuf-consumer/kafka-protobuf-consumer:v1.0.0
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: kafka-config
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/postgresdb
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: POSTGRES_PASSWORD
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config
+  namespace: spring-app
+data:
+  CLUSTER_API_KEY: KXFMKHS7CF3YUMY5
+  CLUSTER_API_SECRET: YlIUNVpcMBrt9LCUMx3vFOCOzkMk1iFTBTNXi+n1zr6ae8Xgrv1AzEnEno/fIskR
+  SR_API_KEY: BNWSV6VLVJVZPV6R
+  SR_API_SECRET: 0EgSyZvD6NV4gAIIKlmR18ziwfe+7cpLmTohQ242vec1X9HCp/LDLdQbmGgdcsx2
