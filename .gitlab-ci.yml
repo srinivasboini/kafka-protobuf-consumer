@@ -1,0 +1,44 @@
+stages:
+  - build
+  - deploy
+
+
+variables:
+  IMAGE_NAME: kafka-protobuf-consumer
+  GIT_LAB_REGISTRY: registry.gitlab.com/srinivasboini/kafka/kafka-protobuf-consumer
+  TAG_VERSION: "v1.0.0"
+  KUBE_CONTEXT: srinivasboini/spirngcloud/gitlab-terraform-gke:gke-agent
+
+
+
+build:
+  stage: build
+  image: quay.io/buildah/stable
+  before_script:
+    - echo "Login to gitlab registry"
+    - buildah login registry.gitlab.com --username ${CI_USER} --password ${CI_PWD}
+    - echo "Login successful"
+  script:
+    - buildah bud -t ${GIT_LAB_REGISTRY}/${IMAGE_NAME} .
+    # TAG=`date +%Y%m%d_%H%M%S`
+    - echo "Pushing image to repository ${IMAGE_NAME}"
+    - buildah push ${IMAGE_NAME} ${GIT_LAB_REGISTRY}/${IMAGE_NAME}:${TAG_VERSION}
+    - echo "Build completed on `date`"
+
+
+
+.kube-context:
+  before_script:
+    - if [ -n "$KUBE_CONTEXT" ]; then kubectl config use-context "$KUBE_CONTEXT"; fi
+
+deploy:
+  stage: deploy
+  when: manual
+  extends: .kube-context
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config get-contexts
+    - kubectl apply -f deployment.yaml -n spring-app
+    - kubectl describe deployment spring-postgres -n spring-app
