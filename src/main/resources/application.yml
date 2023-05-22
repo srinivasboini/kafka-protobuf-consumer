@@ -43,4 +43,4 @@ app:
   topic: stock-topic-1
 
 server:
-  port: 0
+  port: 8080
