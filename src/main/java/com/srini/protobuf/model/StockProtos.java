@@ -3,24 +3,50 @@
 
 package com.srini.protobuf.model;
 
+/**
+ * The type Stock protos.
+ */
 public final class StockProtos {
   private StockProtos() {}
-  public static void registerAllExtensions(
+
+    /**
+     * Register all extensions.
+     *
+     * @param registry the registry
+     */
+    public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
 
-  public static void registerAllExtensions(
+    /**
+     * Register all extensions.
+     *
+     * @param registry the registry
+     */
+    public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  static final com.google.protobuf.Descriptors.Descriptor
+
+    /**
+     * The Internal static stock descriptor.
+     */
+    static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Stock_descriptor;
-  static final 
+    /**
+     * The Internal static stock field accessor table.
+     */
+    static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Stock_fieldAccessorTable;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
+    /**
+     * Gets descriptor.
+     *
+     * @return the descriptor
+     */
+    public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
